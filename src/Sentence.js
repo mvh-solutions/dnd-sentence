@@ -1,49 +1,14 @@
 import update from 'immutability-helper'
 import {useCallback, useState} from 'react'
 import {WordItem} from './WordItem.js'
+import testData from './testData';
 
 const style = {
     padding: "10px",
     border: "1px solid black"
 }
 export const Sentence = () => {
-    const [cards, setCards] = useState([
-        {
-            id: 1,
-            origPos: 1,
-            text: 'ὥστε',
-        },
-        {
-            id: 2,
-            origPos: 2,
-            text: 'ἀγαπητοί',
-        },
-        {
-            id: 3,
-            origPos: 3,
-            text: 'μου',
-        },
-        {
-            id: 4,
-            origPos: 4,
-            text: 'καθὼς',
-        },
-        {
-            id: 5,
-            origPos: 5,
-            text: 'πάντοτε',
-        },
-        {
-            id: 6,
-            origPos: 6,
-            text: 'ὑπηκούσατε',
-        },
-        {
-            id: 7,
-            origPos: 7,
-            text: 'κατεργάζεσθε',
-        },
-    ])
+    const [cards, setCards] = useState([...testData]);
     const moveCard = useCallback((dragIndex, hoverIndex) => {
         setCards((prevCards) =>
             update(prevCards, {
@@ -62,7 +27,7 @@ export const Sentence = () => {
                 id={card.id}
                 text={card.text}
                 moveCard={moveCard}
-                origPos={card.origPos}
+                origPos={card.payload.origPos}
             />
         )
     }, [moveCard])
