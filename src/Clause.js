@@ -1,17 +1,19 @@
 import {useRef} from 'react'
 import {useDrag, useDrop} from 'react-dnd'
+import Word from './Word';
 import {ItemTypes} from './ItemTypes.js'
 
 const style = {
-    padding: '5px',
-    marginRight: '10px',
+    marginTop: "10px",
+    padding: "10px",
+    border: "1px solid black",
     backgroundColor: '#CCC',
     cursor: 'move',
 }
-export const WordItem = ({id, origPos, text, index, moveCard}) => {
+export const Clause = ({id, index, moveClause, clauseData}) => {
     const ref = useRef(null)
     const [{handlerId}, drop] = useDrop({
-        accept: ItemTypes.CARD,
+        accept: ItemTypes.CLAUSE,
         collect(monitor) {
             return {
                 handlerId: monitor.getHandlerId(),
@@ -48,7 +50,7 @@ export const WordItem = ({id, origPos, text, index, moveCard}) => {
                 return
             }
             // Time to actually perform the action
-            moveCard(dragIndex, hoverIndex)
+            moveClause(dragIndex, hoverIndex)
             // Note: we're mutating the monitor item here!
             // Generally it's better to avoid mutations,
             // but it's good here for the sake of performance
@@ -57,7 +59,7 @@ export const WordItem = ({id, origPos, text, index, moveCard}) => {
         },
     })
     const [{isDragging}, drag] = useDrag({
-        type: ItemTypes.CARD,
+        type: ItemTypes.CLAUSE,
         item: () => {
             return {id, index}
         },
@@ -68,8 +70,18 @@ export const WordItem = ({id, origPos, text, index, moveCard}) => {
     const opacity = isDragging ? 0 : 1
     drag(drop(ref))
     return (
-        <span ref={ref} style={{...style, opacity}} data-handler-id={handlerId}>
-      {text} ({origPos})
-    </span>
+        <div ref={ref} style={{...style, opacity}} data-handler-id={handlerId}>
+            {clauseData.id}{": "}
+            {
+                clauseData.words.map(
+                    (w, i) =>
+                        <Word
+                            key={i}
+                            wordData={w}
+                        >
+                        </Word>
+                )
+            }
+        </div>
     )
 }

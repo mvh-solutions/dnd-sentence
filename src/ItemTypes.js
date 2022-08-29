@@ -1,3 +1,4 @@
 export const ItemTypes = {
-  CARD: 'card',
+    WORD: 'word',
+    CLAUSE: 'clause',
 }

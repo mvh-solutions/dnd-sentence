@@ -1,13 +1,37 @@
-const words = [
-    'ὥστε',
-    'ἀγαπητοί',
-    'μου',
-    'καθὼς',
-    'πάντοτε',
-    'ὑπηκούσατε',
-    'κατεργάζεσθε',
+const clauses = [
+    [
+        'ὥστε',
+        'ἀγαπητοί',
+        'μου'
+    ],
+    [
+        'καθὼς'
+    ],
+    [
+        'πάντοτε',
+        'ὑπηκούσατε',
+        'κατεργάζεσθε'
+    ],
 ];
 
-const wordObjects = words.map((w, i) => ({text: w, id: `text_${i}`, payload: {origPos: i}}));
+const clauseObjects = clauses.map(
+    (c, i) => (
+        {
+            id: `clause_${i}`,
+            words: c.map(
+                (w, i2) =>
+                    (
+                        {
+                            id: `word_${i}_${i2}`,
+                            text: w,
+                            payload: {
+                                origPos: `${i}_${i2}`
+                            }
+                        }
+                    )
+            )
+        }
+    )
+);
 
-export default wordObjects;
+export default clauseObjects;

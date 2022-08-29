@@ -1,38 +1,37 @@
 import update from 'immutability-helper'
 import {useCallback, useState} from 'react'
-import {WordItem} from './WordItem.js'
+import {Clause} from './Clause.js'
 import testData from './testData';
 
 const style = {
     padding: "10px",
+    paddingBottom: "15px",
     border: "1px solid black"
 }
 export const Sentence = () => {
-    const [cards, setCards] = useState([...testData]);
-    const moveCard = useCallback((dragIndex, hoverIndex) => {
-        setCards((prevCards) =>
-            update(prevCards, {
+    const [clauses, setClauses] = useState([...testData]);
+    const moveClause = useCallback((dragIndex, hoverIndex) => {
+        setClauses((prevClauses) =>
+            update(prevClauses, {
                 $splice: [
                     [dragIndex, 1],
-                    [hoverIndex, 0, prevCards[dragIndex]],
+                    [hoverIndex, 0, prevClauses[dragIndex]],
                 ],
             }),
         )
     }, [])
-    const renderCard = useCallback((card, index) => {
+    const renderClause = useCallback((clause, index) => {
         return (
-            <WordItem
-                key={card.id}
+            <Clause
+                key={clause.id}
                 index={index}
-                id={card.id}
-                text={card.text}
-                moveCard={moveCard}
-                origPos={card.payload.origPos}
+                clauseData={clause}
+                moveClause={moveClause}
             />
         )
-    }, [moveCard])
+    }, [moveClause])
     const saveSentence = () => {
-        console.log(cards.map(c => `<${c.text} (${c.origPos})>`).join(' '))
+        console.log(clauses.map(c => `<${c}>`).join(' '))
     }
     return (
         <>
@@ -40,8 +39,8 @@ export const Sentence = () => {
                 style={style}
             >
                 {
-                    cards.map(
-                        (card, i) => renderCard(card, i)
+                    clauses.map(
+                        (clause, i) => renderClause(clause, i)
                     )
                 }
             </div>
