@@ -7,7 +7,7 @@
   "dependencies": {
     "@emotion/core": "10.0.9",
     "@emotion/styled": "10.0.9",
-    "react": "16.8.3",
+    "react": "^16.8.3",
     "react-beautiful-dnd": "10.1.0",
     "react-dom": "16.8.3",
     "react-scripts": "2.0.3"
@@ -15,6 +15,7 @@
   "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
+    "dev": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
