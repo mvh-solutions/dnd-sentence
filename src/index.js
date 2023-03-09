@@ -1,6 +1,7 @@
-import React, {Component} from "react";
-import ReactDOM from "react-dom";
-import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import React, { Component, useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import ImportFile from './ImportFile';
 
 // fake data generator
 const greek =
@@ -73,10 +74,7 @@ class App extends Component {
 
     handleDoubleClick(item, rowN, colN) {
         let newItemArrays = [...this.state.itemArrays];
-        if (colN === newItemArrays[rowN].length - 1) { // last col in row
-            return;
-        }
-        if (colN === 0 && rowN === 0) { // first col in first row
+        if (colN === newItemArrays[rowN].length || (colN === 0 && rowN === 0)) { // first col in first row
             return;
         }
         if (colN === 0) { // merge with previous row
@@ -105,6 +103,9 @@ class App extends Component {
                     <li>Double-click on an item makes a new row starting with that item</li>
                     <li>Double-click on first item to merge with previous row</li>
                 </ul>
+                <div>
+                    <ImportFile />
+                </div>
                 {
                     this.state.itemArrays.map((items, n) =>
                         <DragDropContext key={n} onDragEnd={(result) => this.onDragEnd(result, n)}>

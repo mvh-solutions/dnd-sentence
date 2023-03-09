@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "greekSentence": "Μετὰ βραχεῖας δὲ χρόνου εἶπεν Ιησους τῷ Πετρῷ",
+        "frenchSentence": "Après un temps court, Jésus dit à Pierre",
+        "alignments": [
+            {
+                "greekWordIndex": 1,
+                "frenchWordIndex": 2
+            },
+            {
+                "greekWordIndex": 2,
+                "frenchWordIndex": 4
+            },
+            {
+                "greekWordIndex": 3,
+                "frenchWordIndex": 6
+            },
+            {
+                "greekWordIndex": 4,
+                "frenchWordIndex": 7
+            }
+        ]
+    }
+]
